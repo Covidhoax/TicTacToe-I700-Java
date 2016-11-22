@@ -26,6 +26,9 @@ public class TicTacToe extends JFrame {
     class PaintCanvas extends JPanel {
         @Override
         public void paintComponent(Graphics g) {  // invoke via repaint()
+            super.paintComponent(g);   // background filing
+            setBackground(Color.white); // background color set to white
+            
 
         }
     }
