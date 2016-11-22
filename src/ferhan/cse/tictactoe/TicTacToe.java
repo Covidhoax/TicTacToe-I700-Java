@@ -1,6 +1,7 @@
 package ferhan.cse.tictactoe;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class TicTacToe extends JFrame {
 
@@ -18,6 +19,16 @@ public class TicTacToe extends JFrame {
     /* Xs and Ys are displayed inside of the cell with lined border  */
     private static final int CELL_LINING = CELL_SIZE / 7;
     private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // paintbrush size
-    private static final int SPEN_WIDTH = 9 ; // paintbrush stroke width
+    private static final int SPEN_WIDTH = 9; // paintbrush stroke width
+
+
+    /*============================  Inner class for GUI actions =========================== */
+    class PaintCanvas extends JPanel {
+        @Override
+        public void paintComponent(Graphics g) {  // invoke via repaint()
+
+        }
+    }
 
 }
+
