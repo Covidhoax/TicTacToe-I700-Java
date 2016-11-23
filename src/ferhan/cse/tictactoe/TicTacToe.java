@@ -2,6 +2,8 @@ package ferhan.cse.tictactoe;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class TicTacToe extends JFrame {
@@ -25,47 +27,43 @@ public class TicTacToe extends JFrame {
     /* Instance variables for gameplay */
     private Random random;
 
+
     /* Instance variables for drawing */
-    private JLabel statusBar;
+    private JLabel statusBar;  // the status bar where all the messages will be shown
+    private PaintCanvas canvas;  //painting canvas with jpanel for the game board
 
     /* Constructor  */
     public TicTacToe() {
+        canvas = new PaintCanvas();  // Construct a drawing canvas (a JPanel)
+        canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
 
+        // Setup the status bar (JLabel) to display status message
+        statusBar = new JLabel("  ");
+        statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
+        statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
 
-
-
+        }
 
     /*============================  Inner class for GUI actions =========================== */
     /* this is paint mark for all the cells when they are not empty  */
-        class PaintCanvas extends JPanel {
-            @Override
-            public void paintComponent(Graphics g) {  // invoke via repaint()
-                super.paintComponent(g);    // fill background
-                setBackground(Color.white); // set its background color
+    class PaintCanvas extends JPanel {
+        @Override
+        public void paintComponent(Graphics g) {  // invoke via repaint()
+            super.paintComponent(g);    // fill background
+            setBackground(Color.white); // set its background color
 
-                // Draw the grid-lines
-                g.setColor(Color.LIGHT_GRAY);
-                for (int row = 1; row < ROW; ++row) {
-                    g.fillRoundRect(0, CELL_SIZE * row - GRID_HALF_WIDTH,
-                            CANVAS_WIDTH - 1, GRID_WIDTH, GRID_WIDTH, GRID_WIDTH);
-                }
-                for (int col = 1; col < COLUMN; ++col) {
-                    g.fillRoundRect(CELL_SIZE * col - GRID_HALF_WIDTH, 0,
-                            GRID_WIDTH, CANVAS_HEIGHT - 1, GRID_WIDTH, GRID_WIDTH);
-                }
-
-                // This is to draw marks when the cell is not empty
-                // Using Graphics2D enables setting the spen's stroke
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setStroke(new BasicStroke(SPEN_WIDTH, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));  // Graphics2D only
-                for (int row = 0; row < ROW; ++row) {
-                    for (int column = 0; column < COLUMN; ++column) {
-                        int x1 = column * CELL_SIZE + CELL_LINING;
-                        int y1 = row * CELL_SIZE + CELL_LINING;
-                        }
-                }
+            // Draw the grid-lines
+            g.setColor(Color.LIGHT_GRAY);
+            for (int row = 1; row < ROW; ++row) {
+                g.fillRoundRect(0, CELL_SIZE * row - GRID_HALF_WIDTH,
+                        CANVAS_WIDTH - 1, GRID_WIDTH, GRID_WIDTH, GRID_WIDTH);
             }
+            for (int col = 1; col < COLUMN; ++col) {
+                g.fillRoundRect(CELL_SIZE * col - GRID_HALF_WIDTH, 0,
+                        GRID_WIDTH, CANVAS_HEIGHT - 1, GRID_WIDTH, GRID_WIDTH);
+            }
+
         }
     }
 }
