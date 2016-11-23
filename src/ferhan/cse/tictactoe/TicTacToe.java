@@ -26,6 +26,9 @@ public class TicTacToe extends JFrame {
 
     /* Instance variables for gameplay */
     private Random random;
+    private GameState gameState;  // the current game state
+    private Player gamePlayer;  // the current player
+    private Player[][] playBoard; // Game board of ROW-by-COLUMN cells
 
 
     /* Instance variables for drawing */
@@ -43,18 +46,36 @@ public class TicTacToe extends JFrame {
         statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
 
-        /* Container created for holding graphics component, and add canvas and status bar */
+        /* Container created for holding graphics component */
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
         contentPane.add(canvas, BorderLayout.CENTER);
         contentPane.add(statusBar, BorderLayout.PAGE_END);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack(); // pack all content in the frame
-        final String VERSION = "0.1FARHAN";
-        setTitle("Tic Toe Toe" + VERSION );
+        pack();  // pack all the components in this JFrame
+        final String VERSION = "0.1F";
+        setTitle("Tic Tac Toe" + VERSION);
+        setVisible(true);  // show this JFrame
 
+        //game components are being defined
+
+        random = new Random();
+        playBoard = new Player[ROW][COLUMN]; // array allocated
+        resetGame(); // initialize the  playboard contents and game variables
+    }
+
+
+    // Initialize the playboard contents and the status
+    public void resetGame() {
+        for (int row=0; row<ROW; row++) {
+            for (int column=0; column<COLUMN; column++) {
+                playBoard[row][column] = Player.EMPTY;  // all cells are empty
+            }
         }
+
+
+    }
 
     /*============================  Inner class for GUI actions =========================== */
     /* this is paint mark for all the cells when they are not empty  */
