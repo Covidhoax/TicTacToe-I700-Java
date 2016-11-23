@@ -38,10 +38,21 @@ public class TicTacToe extends JFrame {
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
 
-        // Setup the status bar (JLabel) to display status message
+        /* Setup the status bar to display status message */
         statusBar = new JLabel("  ");
         statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
+
+        /* Container created for holding graphics component, and add canvas and status bar */
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(canvas, BorderLayout.CENTER);
+        contentPane.add(statusBar, BorderLayout.PAGE_END);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack(); // pack all content in the frame
+        final String VERSION = "0.1FARHAN";
+        setTitle("Tic Toe Toe" + VERSION );
 
         }
 
