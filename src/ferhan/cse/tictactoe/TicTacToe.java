@@ -91,7 +91,7 @@ public class TicTacToe extends JFrame {
     }
 
     /* True when drawn. When there are no more empty cells, it's a draw */
-    public boolean hasDrawn() {
+    public boolean waysToDraw() {
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COLUMN; col++) {
                 if (playBoard[row][col] == Player.EMPTY) {
@@ -102,7 +102,17 @@ public class TicTacToe extends JFrame {
         return true;
     }
 
-
+    /* Returns true X has won against O, or vice versa after placing at rowClick and colClick */
+    public boolean waysToWin(Player thePlayer, int rowClick, int colClick) {
+        return ((playBoard[rowClick][0] == thePlayer && playBoard[rowClick][1] == thePlayer && playBoard[rowClick][2]
+                ==thePlayer) ||  // three in the row
+                (playBoard[0][colClick]== thePlayer && playBoard[colClick][1]== thePlayer && playBoard[colClick][2]
+                        == thePlayer) || // three in the column
+                (playBoard[0][0] == thePlayer && playBoard[1][1] == thePlayer && playBoard[2][2]
+                        == thePlayer) || // three in the diagonal
+                (playBoard[0][2] == thePlayer && playBoard[1][1] == thePlayer && playBoard[2][0]
+                        == thePlayer)); // three in the rverse diagonal
+    }
 
 
     /*============================  Inner class for GUI actions =========================== */
