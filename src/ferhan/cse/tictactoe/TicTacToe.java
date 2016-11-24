@@ -38,7 +38,7 @@ public class TicTacToe extends JFrame {
     /* Constructor  */
     public TicTacToe() {
 
-        /* Graphics components *?
+        /* Graphics components */
         canvas = new PaintCanvas();  // Construct a drawing canvas (a JPanel)
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
