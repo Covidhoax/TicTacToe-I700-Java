@@ -71,8 +71,8 @@ public class TicTacToe extends JFrame {
     // Initialize the playboard contents and the status
     public void resetGame() {
         for (int row = 0; row < ROW; row++) {
-            for (int column = 0; column < COLUMN; column++) {
-                playBoard[row][column] = Player.EMPTY;  // all cells are empty
+            for (int col = 0; col < COLUMN; col++) {
+                playBoard[row][col] = Player.EMPTY;  // all cells are empty
             }
         }
         gameState = GameState.PLAYING;
@@ -81,8 +81,8 @@ public class TicTacToe extends JFrame {
 
     /* checks whether the move is valid or not */
 
-    public boolean validMove(int row, int column) {
-        return row >= 0 && row < ROW && column >= 0 && column < COLUMN && playBoard[row][column] == Player.EMPTY;
+    public boolean validMove(int row, int col) {
+        return row >= 0 && row < ROW && col >= 0 && col < COLUMN && playBoard[row][col] == Player.EMPTY;
 
     }
 
