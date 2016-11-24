@@ -75,8 +75,8 @@ public class TicTacToe extends JFrame {
                 playBoard[row][col] = Player.EMPTY;  // all cells are empty
             }
         }
-        gameState = GameState.PLAYING;
-        gamePlayer = Player.O;
+        gameState = GameState.PLAYING; // all ready to play
+        gamePlayer = Player.O;  // O is the first player
     }
 
     /* checks whether the move is valid or not */
@@ -85,6 +85,24 @@ public class TicTacToe extends JFrame {
         return row >= 0 && row < ROW && col >= 0 && col < COLUMN && playBoard[row][col] == Player.EMPTY;
 
     }
+
+    /* Switches player */
+    public void SwitchPlayer() { gamePlayer = (gamePlayer == Player.O) ? Player.X : Player.O;
+    }
+
+    /* True when drawn. When there are no more empty cells, it's a draw */
+    public boolean hasDrawn() {
+        for (int row = 0; row < ROW; row++) {
+            for (int col = 0; col < COLUMN; col++) {
+                if (playBoard[row][col] == Player.EMPTY) {
+                    return false; // empty cell, so not drawn
+                }
+            }
+        }
+        return true;
+    }
+
+
 
 
     /*============================  Inner class for GUI actions =========================== */
