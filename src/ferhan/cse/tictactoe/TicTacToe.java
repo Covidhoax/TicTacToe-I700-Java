@@ -37,6 +37,8 @@ public class TicTacToe extends JFrame {
 
     /* Constructor  */
     public TicTacToe() {
+
+        /* Graphics components *?
         canvas = new PaintCanvas();  // Construct a drawing canvas (a JPanel)
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
@@ -68,14 +70,22 @@ public class TicTacToe extends JFrame {
 
     // Initialize the playboard contents and the status
     public void resetGame() {
-        for (int row=0; row<ROW; row++) {
-            for (int column=0; column<COLUMN; column++) {
+        for (int row = 0; row < ROW; row++) {
+            for (int column = 0; column < COLUMN; column++) {
                 playBoard[row][column] = Player.EMPTY;  // all cells are empty
             }
         }
+        gameState = GameState.PLAYING;
+        gamePlayer = Player.O;
+    }
 
+    /* checks whether the move is valid or not */
+
+    public boolean validMove(int row, int column) {
+        return row >= 0 && row < ROW && column >= 0 && column < COLUMN && playBoard[row][column] == Player.EMPTY;
 
     }
+
 
     /*============================  Inner class for GUI actions =========================== */
     /* this is paint mark for all the cells when they are not empty  */
@@ -98,4 +108,9 @@ public class TicTacToe extends JFrame {
 
         }
     }
+
+
+
+
 }
+
