@@ -43,6 +43,28 @@ public class TicTacToe extends JFrame {
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
 
+        // The canvas (JPanel) creates a MouseEvent when mouse button is clicked
+        canvas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {  // mouse click handler
+
+                // X and y coordinates of the clicked pixel
+                int mouseX = mouseEvent.getX();
+                int mouseY = mouseEvent.getY();
+
+                // Convert x and y coordinates to a new row and column index.
+                int rowSelected = mouseY / CELL_SIZE;
+                int colSelected = mouseX / CELL_SIZE;
+
+                // Make the selected move and update the state of the game.
+                MoveOrRestart(rowSelected, colSelected);
+
+                /* Refreshes painting canvas by posting the repaint event */
+                repaint();
+            }
+        });
+
+
         /* Setup the status bar to display status message */
         statusBar = new JLabel("  ");
         statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
@@ -80,7 +102,7 @@ public class TicTacToe extends JFrame {
     }
 
     /* If game is still playing nobody has won or drawn then changeGameState  */
-    public void MoveOrRestart (int rowSelected, int colSelected) {
+    public void MoveOrRestart(int rowSelected, int colSelected) {
         if (gameState == GameState.PLAYING) {
             if (validMove(rowSelected, colSelected)) {
                 changeGameState(gamePlayer, rowSelected, colSelected);
@@ -104,13 +126,14 @@ public class TicTacToe extends JFrame {
         if (waysToWin(thePlayer, rowSelected, colSelected)) {
             gameState = (thePlayer == Player.O) ? GameState.O_WON : GameState.X_WON;
 
-        }else if (hasDrawn()) {
+        } else if (hasDrawn()) {
             gameState = GameState.DRAWN; // if there is no result game continues to GameState.Playing
         }
     }
 
     /* Switches player */
-    public void SwitchPlayer() { gamePlayer = (gamePlayer == Player.O) ? Player.X : Player.O;
+    public void SwitchPlayer() {
+        gamePlayer = (gamePlayer == Player.O) ? Player.X : Player.O;
     }
 
     /* True when drawn. When there are no more empty cells, it's a draw */
@@ -128,8 +151,8 @@ public class TicTacToe extends JFrame {
     /* Returns true X has won against O, or vice versa after placing at rowClick and colClick */
     public boolean waysToWin(Player thePlayer, int rowClick, int colClick) {
         return ((playBoard[rowClick][0] == thePlayer && playBoard[rowClick][1] == thePlayer && playBoard[rowClick][2]
-                ==thePlayer) ||  // three in the row
-                (playBoard[0][colClick]== thePlayer && playBoard[colClick][1]== thePlayer && playBoard[colClick][2]
+                == thePlayer) ||  // three in the row
+                (playBoard[0][colClick] == thePlayer && playBoard[colClick][1] == thePlayer && playBoard[colClick][2]
                         == thePlayer) || // three in the column
                 (playBoard[0][0] == thePlayer && playBoard[1][1] == thePlayer && playBoard[2][2]
                         == thePlayer) || // three in the diagonal
@@ -159,8 +182,6 @@ public class TicTacToe extends JFrame {
 
         }
     }
-
-
 
 
 }
