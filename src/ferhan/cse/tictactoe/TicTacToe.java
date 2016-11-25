@@ -178,7 +178,30 @@ public class TicTacToe extends JFrame {
             for (int col = 1; col < COLUMN; ++col) {
                 g.fillRoundRect(CELL_SIZE * col - GRID_HALF_WIDTH, 0,
                         GRID_WIDTH, CANVAS_HEIGHT - 1, GRID_WIDTH, GRID_WIDTH);
+
             }
+
+            /* Paints the marks of all the cells that are not empty. Graphics2d is used to set SPEN's stroke */
+
+            Graphics2D g2d =(Graphics2D) g;
+            g2d.setStroke(new BasicStroke(SPEN_WIDTH, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            for (int row=0; row<ROW; row++) {
+                for (int col=0; col<COLUMN; col++) {
+                    int x1 = col * CELL_SIZE + CELL_LINING;
+                    int y1= row * CELL_SIZE + CELL_LINING;
+                    if (playBoard[row][col] == Player.O) {
+                        g2d.setColor(Color.orange);
+                        int x2 =(col + 1) * CELL_SIZE + CELL_LINING;
+                        int y2 =(row + 1) * CELL_SIZE + CELL_LINING;
+                        g2d.drawLine(x1, y1, x2, y2);
+                        g2d.drawLine(x2, y1, x1, y2);
+                    }else if (playBoard[row][col] == Player.X) {
+                        g2d.setColor(Color.green);
+                        g2d.drawOval(x1, y1, SPEN_SIZE, SPEN_SIZE);
+                    }
+                }
+            }
+
 
         }
     }
