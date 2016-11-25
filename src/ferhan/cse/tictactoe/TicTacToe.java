@@ -201,11 +201,28 @@ public class TicTacToe extends JFrame {
                     }
                 }
             }
+            /* This prints status bar message */
+            if (gameState == GameState.PLAYING) {
+                statusBar.setForeground(Color.black);
+                if (gamePlayer == Player.O) {
+                    statusBar.setText("O's Turn");
 
+                }else {
+                    statusBar.setText("X's Turn");
+                }
+            }else if (gameState == GameState.DRAWN) {
+                statusBar.setForeground(Color.blue);
+                statusBar.setText("Game Drawn");
+            }else if (gameState == GameState.O_WON) {
+                statusBar.setForeground(Color.blue);
+                statusBar.setText("O Won");
+            }else  if (gameState == GameState.X_WON){
+                statusBar.setForeground(Color.blue);
+                statusBar.setText("X Won");
+            }
 
         }
     }
-
 
 }
 
