@@ -6,6 +6,8 @@ package ferhan.cse.tictactoe;
 public enum GameState {
 
     PLAYING,
-    DRAW,
+    DRAWN,
+    O_WON,
+    X_WON
 
 }

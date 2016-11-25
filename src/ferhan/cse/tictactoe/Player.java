@@ -6,5 +6,5 @@ package ferhan.cse.tictactoe;
 public enum  Player {
     EMPTY,
     X,
-    O;
+    O
 }

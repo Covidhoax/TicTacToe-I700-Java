@@ -86,12 +86,23 @@ public class TicTacToe extends JFrame {
 
     }
 
+    /* makes the move and changes gameState */
+    public void changeGameState(Player thePlayer, int rowSelected, int colSelected) {
+        playBoard[rowSelected][colSelected] = gamePlayer; // move
+        if (waysToWin(thePlayer, rowSelected, colSelected)) {
+            gameState = (thePlayer == Player.O) ? GameState.O_WON : GameState.X_WON;
+
+        }else if (hasDrawn()) {
+            gameState = GameState.DRAWN; // if there is no result game continues
+        }
+    }
+
     /* Switches player */
     public void SwitchPlayer() { gamePlayer = (gamePlayer == Player.O) ? Player.X : Player.O;
     }
 
     /* True when drawn. When there are no more empty cells, it's a draw */
-    public boolean waysToDraw() {
+    public boolean hasDrawn() {
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COLUMN; col++) {
                 if (playBoard[row][col] == Player.EMPTY) {
@@ -123,7 +134,7 @@ public class TicTacToe extends JFrame {
             super.paintComponent(g);    // fill background
             setBackground(Color.white); // set its background color
 
-            // Draw the grid-lines
+            // hasDrawn the grid-lines
             g.setColor(Color.LIGHT_GRAY);
             for (int row = 1; row < ROW; ++row) {
                 g.fillRoundRect(0, CELL_SIZE * row - GRID_HALF_WIDTH,
