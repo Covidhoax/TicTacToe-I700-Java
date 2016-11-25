@@ -79,6 +79,18 @@ public class TicTacToe extends JFrame {
         gamePlayer = Player.O;  // O is the first player
     }
 
+    /* If game is still playing nobody has won or drawn then changeGameState  */
+    public void MoveOrRestart (int rowSelected, int colSelected) {
+        if (gameState == GameState.PLAYING) {
+            if (validMove(rowSelected, colSelected)) {
+                changeGameState(gamePlayer, rowSelected, colSelected);
+                SwitchPlayer();
+            } else { // game is over
+                resetGame(); // resets game
+            }
+        }
+    }
+
     /* checks whether the move is valid or not */
 
     public boolean validMove(int row, int col) {
@@ -93,7 +105,7 @@ public class TicTacToe extends JFrame {
             gameState = (thePlayer == Player.O) ? GameState.O_WON : GameState.X_WON;
 
         }else if (hasDrawn()) {
-            gameState = GameState.DRAWN; // if there is no result game continues
+            gameState = GameState.DRAWN; // if there is no result game continues to GameState.Playing
         }
     }
 
