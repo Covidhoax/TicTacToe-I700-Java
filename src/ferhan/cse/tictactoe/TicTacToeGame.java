@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by Farhan on 11/26/2016.
  */
-public class Test {
+public class TicTacToeGame {
     public static void main(String[] args) throws InterruptedException {
         try {
             {

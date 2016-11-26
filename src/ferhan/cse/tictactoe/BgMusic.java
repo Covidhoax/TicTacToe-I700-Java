@@ -9,11 +9,11 @@ import java.io.File;
 /**
  * Created by Farhan on 11/26/2016.
  */
-public class BgMusic extends JFrame{
+public class BgMusic extends JFrame {
 
-    public BgMusic () {
+    public BgMusic() {
 
-        playMusic ();
+        playMusic();
     }
 
     private void playMusic() {
@@ -28,7 +28,7 @@ public class BgMusic extends JFrame{
 
             // midi plays in a infinite loop
             sequencer.start();
-            sequencer.setLoopCount(30);
+            sequencer.setLoopCount(99999);
         } catch (Exception exception) {
 
         }

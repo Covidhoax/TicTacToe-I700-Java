@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
+
 
 public class TicTacToe extends JFrame {
 
@@ -41,7 +41,7 @@ public class TicTacToe extends JFrame {
     private GameState gameState;  // the current game state
     private Player gamePlayer;  // the current player
     private Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
-    private Random random;
+
 
 
     /**
@@ -101,13 +101,11 @@ public class TicTacToe extends JFrame {
         final String VERSION = "0.1FR";
         setTitle("Tic Tac Toe " + VERSION);
         setVisible(true);  // show this JFrame
-
         setResizable(false);
 
 
         //game components are being defined
 
-        Random random = new Random();
         playBoard = new Player[ROW][COLUMN]; // array allocated
         resetGame(); // initialize the game playBoard contents and game variables
     }
