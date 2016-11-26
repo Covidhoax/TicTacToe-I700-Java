@@ -14,7 +14,9 @@ public class TicTacToe extends JFrame {
 
     private static final int ROW = 3;  // ROW by COLUMN cells
     private static final int COLUMN = 3;
-
+    public static int Ex_WonCount = 0;
+    public static int Naught_wonCount = 0;
+    public static int DrawnCount = 0;
     /**
      * Variable using different dimensions and shall be used for GUI
      */
@@ -31,6 +33,7 @@ public class TicTacToe extends JFrame {
     private static final int CELL_LINING = CELL_SIZE / 7;
     private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // width/height
     private static final int SPEN_WIDTH = 9; // spen stroke width
+
 
     /**
      * Instance variables for gameplay
@@ -77,7 +80,7 @@ public class TicTacToe extends JFrame {
                 /**
                  *  Refreshes painting canvas by posting the repaint event
                  */
-                repaint();
+                 repaint();
             }
         });
 
@@ -100,9 +103,10 @@ public class TicTacToe extends JFrame {
         setVisible(true);  // show this JFrame
         setResizable(false);
 
+
         //game components are being defined
 
-        random = new Random();
+        Random random = new Random();
         playBoard = new Player[ROW][COLUMN]; // array allocated
         resetGame(); // initialize the game playBoard contents and game variables
     }
@@ -205,7 +209,7 @@ public class TicTacToe extends JFrame {
             setBackground(Color.white); // set its background color
 
             // hasDrawn the grid-lines
-            g.setColor(Color.LIGHT_GRAY);
+            g.setColor(Color.BLACK);
             for (int row = 1; row < ROW; ++row) {
                 g.fillRoundRect(0, CELL_SIZE * row - GRID_HALF_WIDTH,
                         CANVAS_WIDTH - 1, GRID_WIDTH, GRID_WIDTH, GRID_WIDTH);
@@ -240,6 +244,7 @@ public class TicTacToe extends JFrame {
                 }
             }
 
+
             /**
              * This prints status bar message
              */
@@ -252,17 +257,21 @@ public class TicTacToe extends JFrame {
                 }
             } else if (gameState == GameState.DRAWN) {
                 statusBar.setForeground(Color.RED);
-                statusBar.setText("It's a Draw! Click to play again.");
+                DrawnCount++;
+                statusBar.setText("It's a Draw! " + " Draws: " +DrawnCount+ " Click to play again.");
             } else if (gameState == GameState.EX_WON) {
                 statusBar.setForeground(Color.RED);
-                statusBar.setText("'X' Won!");
+                Ex_WonCount++;
+                statusBar.setText("'X' Won!  Score is X: " + Ex_WonCount + " &  O: " + Naught_wonCount);
             } else if (gameState == GameState.NAUGHT_WON) {
                 statusBar.setForeground(Color.RED);
-                statusBar.setText("'O' Won!");
+                Naught_wonCount++;
+                statusBar.setText("'O' Won!  Score is O: " + Naught_wonCount + " &  X: " + Ex_WonCount);
+            }
             }
 
         }
     }
 
-}
+
 

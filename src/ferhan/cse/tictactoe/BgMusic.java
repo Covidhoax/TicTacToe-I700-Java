@@ -28,7 +28,7 @@ public class BgMusic extends JFrame{
 
             // midi plays in a infinite loop
             sequencer.start();
-            sequencer.setLoopCount(Integer.MAX_VALUE);
+            sequencer.setLoopCount(30);
         } catch (Exception exception) {
 
         }
