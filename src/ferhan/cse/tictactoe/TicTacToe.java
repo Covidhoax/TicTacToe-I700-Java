@@ -47,7 +47,6 @@ public class TicTacToe extends JFrame {
     private Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
 
 
-
     /**
      * Instance variables for drawing
      * Status bar will display all status messages including turns/win/lose/draw
@@ -125,23 +124,30 @@ public class TicTacToe extends JFrame {
     }
 
 
-    /** I
-     *initialize the playboard contents and the status
+    /**
+     * I
+     * initialize the playboard contents and the status
      */
 
     public void resetGame() {
-        for (int row = 0; row < ROW; ++row) {
-            for (int col = 0; col < COLUMN; ++col) {
+        int row = 0;
+        while (row < ROW) {
+            int col = 0;
+            while (col < COLUMN) {
                 playBoard[row][col] = Player.EMPTY; // all cells empty
+                ++col;
             }
+            ++row;
         }
         gameState = GameState.PLAYING; // ready to play
         gamePlayer = Player.EX;       // ex plays first
     }
 
+
     /**
      * If game is still playing nobody has won or drawn then changeGameState
      */
+
     public void MoveOrRestart(int rowSelected, int colSelected) {
         if (gameState == GameState.PLAYING) {
             if (validMove(rowSelected, colSelected)) {
@@ -175,7 +181,7 @@ public class TicTacToe extends JFrame {
     }
 
     /**
-     *  Switches player
+     * Switches player
      */
     public void switchPlayer() {
         gamePlayer = (gamePlayer == Player.EX) ? Player.NAUGHT : Player.EX;
