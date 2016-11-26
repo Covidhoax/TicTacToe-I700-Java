@@ -12,7 +12,9 @@ public class TicTacToe extends JFrame {
     private static final int ROW = 3;  // ROW by COLUMN cells
     private static final int COLUMN = 3;
 
-    /**Variable using differemt dimensions and shall be used for GUI */
+    /**
+     * Variable using differemt dimensions and shall be used for GUI
+     */
     private static final int CELL_SIZE = 125; // cell width and height
     private static final int CANVAS_WIDTH = CELL_SIZE * COLUMN;  // the drawing canvas
     private static final int CANVAS_HEIGHT = CELL_SIZE * ROW;
@@ -22,7 +24,8 @@ public class TicTacToe extends JFrame {
     /* Xs and Ys are displayed inside of the cell with lined border  */
     private static final int CELL_LINING = CELL_SIZE / 7;
     private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // width/height
-    private static final int SPEN_WIDTH = 9;; // spen stroke width
+    private static final int SPEN_WIDTH = 9;
+    ; // spen stroke width
 
     /* Instance variables for gameplay */
     public GameState gameState;  // the current game state
@@ -98,7 +101,7 @@ public class TicTacToe extends JFrame {
             }
         }
         gameState = GameState.PLAYING; // ready to play
-        gamePlayer = Player.EX;       // cross plays first
+        gamePlayer = Player.EX;       // ex plays first
     }
 
     /* If game is still playing nobody has won or drawn then changeGameState  */
@@ -147,14 +150,16 @@ public class TicTacToe extends JFrame {
         return true; /** no more empty cells, so game drawn */
     }
 
-    /** Returns true EX has won against NAUGHT, or vice versa after placing at rowClicked and colClicked */
-    public boolean waysToWin(Player thePlayer, int rowClicked, int columnClicked) {
+    /**
+     * Returns true EX has won against NAUGHT, or vice versa after placing at rowClicked and colClicked
+     */
+    public boolean waysToWin(Player thePlayer, int rowClicked, int colClicked) {
         return ((playBoard[rowClicked][0] == thePlayer      // three in the row
                 && playBoard[rowClicked][1] == thePlayer
                 && playBoard[rowClicked][2] == thePlayer) ||
-                (playBoard[0][columnClicked] == thePlayer      // three in the column
-                        && playBoard[1][columnClicked] == thePlayer
-                        && playBoard[2][columnClicked] == thePlayer) ||
+                (playBoard[0][colClicked] == thePlayer      // three in the column
+                        && playBoard[1][colClicked] == thePlayer
+                        && playBoard[2][colClicked] == thePlayer) ||
                 (playBoard[0][0] == thePlayer                // three in the diagonal
                         && playBoard[1][1] == thePlayer
                         && playBoard[2][2] == thePlayer) ||
@@ -166,7 +171,10 @@ public class TicTacToe extends JFrame {
 
 
     /*============================  Inner class for GUI actions =========================== */
-    /** This is paint mark for all the cells when they are not empty  */
+
+    /**
+     * This is paint mark for all the cells when they are not empty
+     */
     class PaintCanvas extends JPanel {
         @Override
         public void paintComponent(Graphics g) {  // invoke via repaint()
