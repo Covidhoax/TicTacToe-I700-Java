@@ -1,0 +1,6 @@
+{
+  "name": "Tictactoe-i700-java",
+  "tagline": "",
+  "body": "        **TicTacToe 0.1FR**\r\n        ====================\r\n        **Farhan Nayeem Islam**\r\n        ------------------------\r\n\r\n        **IT College Estonia. Cyber Security C11 Group**\r\n\r\nInstallation guide:\r\n1. Clone repository from GitHub\r\n2. Import project with Java IDE\r\n3. Run the Test class\r\n4. Alternatively I might upload a jar file in the near future.\r\n\r\nWhat is Tic Tac Toe Game like?\r\nIt is a very simple, two player NO AI based Tic Tac Toe game. There is a background music taken from \"vgmusic.com\"\r\nThe game has a score counter functionality as well. All information is displayed in the game's status bar.\r\n\r\nWhy did I chose Tic Tac Toe?\r\nThis is for my Java Homework at Estonian IT College. Tic Tac Toe isn't very complex, yet kind of challenging , and\r\nis indeed a very interesting game to play.\r\n\r\nAre there any bugs?\r\nSo far I haven't noticed any.\r\n\r\nIs this the final version?\r\nNo. This is Version 0.1FR. I'll be working on the Minimax AI and possibly a 3d Tic Tac Toe next year.\r\n\r\nWhat licence are you using?\r\nAs you can see it's the Apache licence. It is quite liberal.\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
