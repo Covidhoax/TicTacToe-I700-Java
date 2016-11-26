@@ -10,6 +10,8 @@ public class TicTacToe extends JFrame {
 
     /**
      * Instance variables constants
+     * X and O's score count
+     * Draw count
      */
 
     private static final int ROW = 3;  // ROW by COLUMN cells
@@ -19,6 +21,7 @@ public class TicTacToe extends JFrame {
     private static int DrawnCount = 0;  // Draw Count
     /**
      * Variable using different dimensions and shall be used for GUI
+     * The canvas is drawn here
      */
 
     private static final int CELL_SIZE = 200; // cell width and height
@@ -29,6 +32,7 @@ public class TicTacToe extends JFrame {
 
     /**
      * Xs and Ys are displayed inside of the cell with lined border
+     * The spen is the special pen/marker with stroke width
      */
     private static final int CELL_LINING = CELL_SIZE / 7;
     private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // width/height
@@ -46,9 +50,11 @@ public class TicTacToe extends JFrame {
 
     /**
      * Instance variables for drawing
+     * Status bar will display all status messages including turns/win/lose/draw
+     * Canvas was painted for the playboard
      */
     private JLabel statusBar;  // the status bar where all the messages will be shown
-    public PaintCanvas canvas;  //painting canvas with jpanel for the game board
+    public PaintCanvas canvas;  //painting canvas with jpanel for the playboard
 
     /**
      * Constructor
@@ -85,12 +91,16 @@ public class TicTacToe extends JFrame {
         });
 
 
-        /* Setup the status bar to display status message */
+        /**
+         * Setup the status bar to display status message
+         */
         statusBar = new JLabel("  ");
         statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 14));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
 
-        /* Container created for holding graphics component */
+        /**
+         * Container created for holding graphics component
+         */
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
         contentPane.add(canvas, BorderLayout.CENTER);
@@ -101,17 +111,24 @@ public class TicTacToe extends JFrame {
         final String VERSION = "0.1FR";
         setTitle("Tic Tac Toe " + VERSION);
         setVisible(true);  // show this JFrame
+
         setResizable(false);
 
 
-        //game components are being defined
+        /**
+         *game components are being defined
+         */
+
 
         playBoard = new Player[ROW][COLUMN]; // array allocated
         resetGame(); // initialize the game playBoard contents and game variables
     }
 
 
-    // Initialize the playboard contents and the status
+    /** I
+     *initialize the playboard contents and the status
+     */
+
     public void resetGame() {
         for (int row = 0; row < ROW; ++row) {
             for (int col = 0; col < COLUMN; ++col) {
@@ -157,7 +174,9 @@ public class TicTacToe extends JFrame {
         }
     }
 
-    /* Switches player */
+    /**
+     *  Switches player
+     */
     public void switchPlayer() {
         gamePlayer = (gamePlayer == Player.EX) ? Player.NAUGHT : Player.EX;
     }
