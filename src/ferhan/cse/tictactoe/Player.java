@@ -5,6 +5,6 @@ package ferhan.cse.tictactoe;
  */
 public enum  Player {
     EMPTY,
-    X,
-    O
+    EX,  // player X
+    NAUGHT  // player O
 }

@@ -7,7 +7,7 @@ public enum GameState {
 
     PLAYING,
     DRAWN,
-    O_WON,
-    X_WON
+    EX_WON,
+    NAUGHT_WON
 
 }

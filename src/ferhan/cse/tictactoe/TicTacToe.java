@@ -12,7 +12,7 @@ public class TicTacToe extends JFrame {
     private static final int ROW = 3;  // ROW by COLUMN cells
     private static final int COLUMN = 3;
 
-    /*Variable using differemt dimensions and shall be used for GUI */
+    /**Variable using differemt dimensions and shall be used for GUI */
     private static final int CELL_SIZE = 125; // cell width and height
     private static final int CANVAS_WIDTH = CELL_SIZE * COLUMN;  // the drawing canvas
     private static final int CANVAS_HEIGHT = CELL_SIZE * ROW;
@@ -21,19 +21,19 @@ public class TicTacToe extends JFrame {
 
     /* Xs and Ys are displayed inside of the cell with lined border  */
     private static final int CELL_LINING = CELL_SIZE / 7;
-    private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // spen (spen is special pen or paintbrush) size
-    private static final int SPEN_WIDTH = 9; // spen stroke width
+    private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // width/height
+    private static final int SPEN_WIDTH = 9;; // spen stroke width
 
     /* Instance variables for gameplay */
-    private Random random;
-    private GameState gameState;  // the current game state
-    private Player gamePlayer;  // the current player
-    private Player[][] playBoard; // Game board of ROW-by-COLUMN cells
+    public GameState gameState;  // the current game state
+    public Player gamePlayer;  // the current player
+    public Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
+    public Random random;
 
 
     /* Instance variables for drawing */
-    private JLabel statusBar;  // the status bar where all the messages will be shown
-    private PaintCanvas canvas;  //painting canvas with jpanel for the game board
+    public JLabel statusBar;  // the status bar where all the messages will be shown
+    public PaintCanvas canvas;  //painting canvas with jpanel for the game board
 
     /* Constructor  */
     public TicTacToe() {
@@ -48,7 +48,7 @@ public class TicTacToe extends JFrame {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {  // mouse click handler
 
-                // X and y coordinates of the clicked pixel
+                // EX and y coordinates of the clicked pixel
                 int mouseX = mouseEvent.getX();
                 int mouseY = mouseEvent.getY();
 
@@ -58,7 +58,6 @@ public class TicTacToe extends JFrame {
 
                 // Make the selected move and update the state of the game.
                 MoveOrRestart(rowSelected, colSelected);
-
                 /* Refreshes painting canvas by posting the repaint event */
                 repaint();
             }
@@ -67,7 +66,7 @@ public class TicTacToe extends JFrame {
 
         /* Setup the status bar to display status message */
         statusBar = new JLabel("  ");
-        statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
+        statusBar.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 14));
         statusBar.setBorder(BorderFactory.createEmptyBorder(2, 5, 4, 5));
 
         /* Container created for holding graphics component */
@@ -78,27 +77,28 @@ public class TicTacToe extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();  // pack all the components in this JFrame
-        final String VERSION = "0.1F";
-        setTitle("Tic Tac Toe" + VERSION);
+        final String VERSION = "0.1FR";
+        setTitle("Tic Tac Toe " + VERSION);
         setVisible(true);  // show this JFrame
+        setResizable(false);
 
         //game components are being defined
 
         random = new Random();
         playBoard = new Player[ROW][COLUMN]; // array allocated
-        resetGame(); // initialize the  playboard contents and game variables
+        resetGame(); // initialize the game playBoard contents and game variables
     }
 
 
     // Initialize the playboard contents and the status
     public void resetGame() {
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COLUMN; col++) {
-                playBoard[row][col] = Player.EMPTY;  // all cells are empty
+        for (int row = 0; row < ROW; ++row) {
+            for (int col = 0; col < COLUMN; ++col) {
+                playBoard[row][col] = Player.EMPTY; // all cells empty
             }
         }
-        gameState = GameState.PLAYING; // all ready to play
-        gamePlayer = Player.O;  // O is the first player
+        gameState = GameState.PLAYING; // ready to play
+        gamePlayer = Player.EX;       // cross plays first
     }
 
     /* If game is still playing nobody has won or drawn then changeGameState  */
@@ -106,10 +106,10 @@ public class TicTacToe extends JFrame {
         if (gameState == GameState.PLAYING) {
             if (validMove(rowSelected, colSelected)) {
                 changeGameState(gamePlayer, rowSelected, colSelected);
-                SwitchPlayer();
-            } else { // game is over
-                resetGame(); // resets game
+                switchPlayer();
             }
+        } else {       // game over
+            resetGame(); // restart the game
         }
     }
 
@@ -117,14 +117,13 @@ public class TicTacToe extends JFrame {
 
     public boolean validMove(int row, int col) {
         return row >= 0 && row < ROW && col >= 0 && col < COLUMN && playBoard[row][col] == Player.EMPTY;
-
     }
 
     /* makes the move and changes gameState */
     public void changeGameState(Player thePlayer, int rowSelected, int colSelected) {
         playBoard[rowSelected][colSelected] = gamePlayer; // move
         if (waysToWin(thePlayer, rowSelected, colSelected)) {
-            gameState = (thePlayer == Player.O) ? GameState.O_WON : GameState.X_WON;
+            gameState = (thePlayer == Player.EX) ? GameState.EX_WON : GameState.NAUGHT_WON;
 
         } else if (hasDrawn()) {
             gameState = GameState.DRAWN; // if there is no result game continues to GameState.Playing
@@ -132,37 +131,42 @@ public class TicTacToe extends JFrame {
     }
 
     /* Switches player */
-    public void SwitchPlayer() {
-        gamePlayer = (gamePlayer == Player.O) ? Player.X : Player.O;
+    public void switchPlayer() {
+        gamePlayer = (gamePlayer == Player.EX) ? Player.NAUGHT : Player.EX;
     }
 
     /* True when drawn. When there are no more empty cells, it's a draw */
     public boolean hasDrawn() {
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COLUMN; col++) {
+        for (int row = 0; row < ROW; ++row) {
+            for (int col = 0; col < COLUMN; ++col) {
                 if (playBoard[row][col] == Player.EMPTY) {
-                    return false; // empty cell, so not drawn
+                    return false; // an empty cell found, not draw, exit
                 }
             }
         }
-        return true;
+        return true; /** no more empty cells, so game drawn */
     }
 
-    /* Returns true X has won against O, or vice versa after placing at rowClick and colClick */
-    public boolean waysToWin(Player thePlayer, int rowClick, int colClick) {
-        return ((playBoard[rowClick][0] == thePlayer && playBoard[rowClick][1] == thePlayer && playBoard[rowClick][2]
-                == thePlayer) ||  // three in the row
-                (playBoard[0][colClick] == thePlayer && playBoard[colClick][1] == thePlayer && playBoard[colClick][2]
-                        == thePlayer) || // three in the column
-                (playBoard[0][0] == thePlayer && playBoard[1][1] == thePlayer && playBoard[2][2]
-                        == thePlayer) || // three in the diagonal
-                (playBoard[0][2] == thePlayer && playBoard[1][1] == thePlayer && playBoard[2][0]
-                        == thePlayer)); // three in the rverse diagonal
+    /** Returns true EX has won against NAUGHT, or vice versa after placing at rowClicked and colClicked */
+    public boolean waysToWin(Player thePlayer, int rowClicked, int columnClicked) {
+        return ((playBoard[rowClicked][0] == thePlayer      // three in the row
+                && playBoard[rowClicked][1] == thePlayer
+                && playBoard[rowClicked][2] == thePlayer) ||
+                (playBoard[0][columnClicked] == thePlayer      // three in the column
+                        && playBoard[1][columnClicked] == thePlayer
+                        && playBoard[2][columnClicked] == thePlayer) ||
+                (playBoard[0][0] == thePlayer                // three in the diagonal
+                        && playBoard[1][1] == thePlayer
+                        && playBoard[2][2] == thePlayer) ||
+                (playBoard[0][2] == thePlayer                // three in the reverse diagonal
+                        && playBoard[1][1] == thePlayer
+                        && playBoard[2][0] == thePlayer));
     }
+
 
 
     /*============================  Inner class for GUI actions =========================== */
-    /* this is paint mark for all the cells when they are not empty  */
+    /** This is paint mark for all the cells when they are not empty  */
     class PaintCanvas extends JPanel {
         @Override
         public void paintComponent(Graphics g) {  // invoke via repaint()
@@ -181,44 +185,44 @@ public class TicTacToe extends JFrame {
 
             }
 
-            /* Paints the marks of all the cells that are not empty. Graphics2d is used to set SPEN's stroke */
+            /** Paints the marks of all the cells that are not empty. Graphics2d is used to set SPEN's stroke */
 
-            Graphics2D g2d =(Graphics2D) g;
-            g2d.setStroke(new BasicStroke(SPEN_WIDTH, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            for (int row=0; row<ROW; row++) {
-                for (int col=0; col<COLUMN; col++) {
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setStroke(new BasicStroke(SPEN_WIDTH, BasicStroke.CAP_ROUND,
+                    BasicStroke.JOIN_ROUND));  // Graphics2D only
+            for (int row = 0; row < ROW; ++row) {
+                for (int col = 0; col < COLUMN; ++col) {
                     int x1 = col * CELL_SIZE + CELL_LINING;
-                    int y1= row * CELL_SIZE + CELL_LINING;
-                    if (playBoard[row][col] == Player.O) {
-                        g2d.setColor(Color.orange);
-                        int x2 =(col + 1) * CELL_SIZE + CELL_LINING;
-                        int y2 =(row + 1) * CELL_SIZE + CELL_LINING;
+                    int y1 = row * CELL_SIZE + CELL_LINING;
+                    if (playBoard[row][col] == Player.EX) {
+                        g2d.setColor(Color.ORANGE);
+                        int x2 = (col + 1) * CELL_SIZE - CELL_LINING;
+                        int y2 = (row + 1) * CELL_SIZE - CELL_LINING;
                         g2d.drawLine(x1, y1, x2, y2);
                         g2d.drawLine(x2, y1, x1, y2);
-                    }else if (playBoard[row][col] == Player.X) {
-                        g2d.setColor(Color.green);
+                    } else if (playBoard[row][col] == Player.NAUGHT) {
+                        g2d.setColor(Color.GREEN);
                         g2d.drawOval(x1, y1, SPEN_SIZE, SPEN_SIZE);
                     }
                 }
             }
             /* This prints status bar message */
             if (gameState == GameState.PLAYING) {
-                statusBar.setForeground(Color.black);
-                if (gamePlayer == Player.O) {
-                    statusBar.setText("O's Turn");
-
-                }else {
+                statusBar.setForeground(Color.BLACK);
+                if (gamePlayer == Player.EX) {
                     statusBar.setText("X's Turn");
+                } else {
+                    statusBar.setText("O's Turn");
                 }
-            }else if (gameState == GameState.DRAWN) {
-                statusBar.setForeground(Color.blue);
-                statusBar.setText("Game Drawn");
-            }else if (gameState == GameState.O_WON) {
-                statusBar.setForeground(Color.blue);
-                statusBar.setText("O Won");
-            }else  if (gameState == GameState.X_WON){
-                statusBar.setForeground(Color.blue);
-                statusBar.setText("X Won");
+            } else if (gameState == GameState.DRAWN) {
+                statusBar.setForeground(Color.RED);
+                statusBar.setText("It's a Draw! Click to play again.");
+            } else if (gameState == GameState.EX_WON) {
+                statusBar.setForeground(Color.RED);
+                statusBar.setText("'X' Won!");
+            } else if (gameState == GameState.NAUGHT_WON) {
+                statusBar.setForeground(Color.RED);
+                statusBar.setText("'O' Won!");
             }
 
         }
