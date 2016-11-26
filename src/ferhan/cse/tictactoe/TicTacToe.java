@@ -14,14 +14,14 @@ public class TicTacToe extends JFrame {
 
     private static final int ROW = 3;  // ROW by COLUMN cells
     private static final int COLUMN = 3;
-    public static int Ex_WonCount = 0;
-    public static int Naught_wonCount = 0;
-    public static int DrawnCount = 0;
+    private static int Ex_WonCount = 0;  // X's win count
+    private static int Naught_wonCount = 0;  // O's win count
+    private static int DrawnCount = 0;  // Draw Count
     /**
      * Variable using different dimensions and shall be used for GUI
      */
 
-    private static final int CELL_SIZE = 125; // cell width and height
+    private static final int CELL_SIZE = 200; // cell width and height
     private static final int CANVAS_WIDTH = CELL_SIZE * COLUMN;  // the drawing canvas
     private static final int CANVAS_HEIGHT = CELL_SIZE * ROW;
     private static final int GRID_WIDTH = 9;                   // Grid-line's width
@@ -38,16 +38,16 @@ public class TicTacToe extends JFrame {
     /**
      * Instance variables for gameplay
      */
-    public GameState gameState;  // the current game state
-    public Player gamePlayer;  // the current player
-    public Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
-    public Random random;
+    private GameState gameState;  // the current game state
+    private Player gamePlayer;  // the current player
+    private Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
+    private Random random;
 
 
     /**
      * Instance variables for drawing
      */
-    public JLabel statusBar;  // the status bar where all the messages will be shown
+    private JLabel statusBar;  // the status bar where all the messages will be shown
     public PaintCanvas canvas;  //painting canvas with jpanel for the game board
 
     /**
@@ -80,7 +80,7 @@ public class TicTacToe extends JFrame {
                 /**
                  *  Refreshes painting canvas by posting the repaint event
                  */
-                 repaint();
+                repaint();
             }
         });
 
@@ -101,6 +101,7 @@ public class TicTacToe extends JFrame {
         final String VERSION = "0.1FR";
         setTitle("Tic Tac Toe " + VERSION);
         setVisible(true);  // show this JFrame
+
         setResizable(false);
 
 
@@ -124,7 +125,7 @@ public class TicTacToe extends JFrame {
     }
 
     /**
-     *If game is still playing nobody has won or drawn then changeGameState
+     * If game is still playing nobody has won or drawn then changeGameState
      */
     public void MoveOrRestart(int rowSelected, int colSelected) {
         if (gameState == GameState.PLAYING) {
@@ -138,7 +139,7 @@ public class TicTacToe extends JFrame {
     }
 
     /**
-     *  checks whether the move is valid or not
+     * checks whether the move is valid or not
      */
 
     public boolean validMove(int row, int col) {
@@ -251,27 +252,29 @@ public class TicTacToe extends JFrame {
             if (gameState == GameState.PLAYING) {
                 statusBar.setForeground(Color.BLACK);
                 if (gamePlayer == Player.EX) {
-                    statusBar.setText("X's Turn");
+                    statusBar.setText(" X's Turn");
                 } else {
-                    statusBar.setText("O's Turn");
+                    statusBar.setText(" O's Turn");
                 }
             } else if (gameState == GameState.DRAWN) {
                 statusBar.setForeground(Color.RED);
                 DrawnCount++;
-                statusBar.setText("It's a Draw! " + " Draws: " +DrawnCount+ " Click to play again.");
+                statusBar.setText("It's a Draw! " + " Draws: " + DrawnCount +
+                        " Score is X: " + Ex_WonCount + " &  O: " + Naught_wonCount + " Click to play again.");
             } else if (gameState == GameState.EX_WON) {
                 statusBar.setForeground(Color.RED);
                 Ex_WonCount++;
-                statusBar.setText("'X' Won!  Score is X: " + Ex_WonCount + " &  O: " + Naught_wonCount);
+                statusBar.setText("X Won!" + "Score is X: " + Ex_WonCount + " &  O: " + Naught_wonCount +
+                        " Draws: " + DrawnCount + " Click to play again.");
             } else if (gameState == GameState.NAUGHT_WON) {
                 statusBar.setForeground(Color.RED);
                 Naught_wonCount++;
-                statusBar.setText("'O' Won!  Score is O: " + Naught_wonCount + " &  X: " + Ex_WonCount);
+                statusBar.setText("O Won!  Score is O: " + Naught_wonCount + " &  X: " + Ex_WonCount +
+                        " Draws: " + DrawnCount + " Click to play again.");
             }
-            }
-
         }
     }
+}
 
 
 
