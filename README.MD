@@ -5,6 +5,9 @@
 
         **IT College Estonia. Cyber Security C11 Group**
 
+        JavaDocs html version : http://enos.itcollege.ee/~fislam/
+        Github pages :https://islamfarhan.github.io/TicTacToe-I700-Java/
+
 Installation guide:
 1. Clone repository from GitHub
 2. Import project with Java IDE
