@@ -1,13 +1,11 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="TicTacToeFR">
     <output-path>$PROJECT_DIR$/artifacts/TicTacToeFR</output-path>
-    <properties id="ant-preprocessing">
-      <options enabled="true" />
-    </properties>
     <root id="archive" name="TicTacToeFR.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
+      <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/groovy-all-2.4.6.jar" />
     </root>
   </artifact>
 </component>
