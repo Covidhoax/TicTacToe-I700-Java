@@ -8,37 +8,48 @@ import java.util.Random;
 
 public class TicTacToe extends JFrame {
 
-    /*====================== Instance variables constants ======================= */
+    /**
+     * Instance variables constants
+     */
+
     private static final int ROW = 3;  // ROW by COLUMN cells
     private static final int COLUMN = 3;
 
     /**
-     * Variable using differemt dimensions and shall be used for GUI
+     * Variable using different dimensions and shall be used for GUI
      */
+
     private static final int CELL_SIZE = 125; // cell width and height
     private static final int CANVAS_WIDTH = CELL_SIZE * COLUMN;  // the drawing canvas
     private static final int CANVAS_HEIGHT = CELL_SIZE * ROW;
     private static final int GRID_WIDTH = 9;                   // Grid-line's width
     private static final int GRID_HALF_WIDTH = GRID_WIDTH / 2; // Grid-line's half-width
 
-    /* Xs and Ys are displayed inside of the cell with lined border  */
+    /**
+     * Xs and Ys are displayed inside of the cell with lined border
+     */
     private static final int CELL_LINING = CELL_SIZE / 7;
     private static final int SPEN_SIZE = CELL_SIZE - CELL_LINING * 2; // width/height
-    private static final int SPEN_WIDTH = 9;
-    ; // spen stroke width
+    private static final int SPEN_WIDTH = 9; // spen stroke width
 
-    /* Instance variables for gameplay */
+    /**
+     * Instance variables for gameplay
+     */
     public GameState gameState;  // the current game state
     public Player gamePlayer;  // the current player
     public Player[][] playBoard; // Game playBoard of ROW-by-COLUMN cells
     public Random random;
 
 
-    /* Instance variables for drawing */
+    /**
+     * Instance variables for drawing
+     */
     public JLabel statusBar;  // the status bar where all the messages will be shown
     public PaintCanvas canvas;  //painting canvas with jpanel for the game board
 
-    /* Constructor  */
+    /**
+     * Constructor
+     */
     public TicTacToe() {
 
         /* Graphics components */
@@ -46,12 +57,14 @@ public class TicTacToe extends JFrame {
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
 
-        // The canvas (JPanel) creates a MouseEvent when mouse button is clicked
+        /**
+         * The canvas (JPanel) creates a MouseEvent when mouse button is clicked
+         */
         canvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {  // mouse click handler
 
-                // EX and y coordinates of the clicked pixel
+                // X and y coordinates of the clicked pixel
                 int mouseX = mouseEvent.getX();
                 int mouseY = mouseEvent.getY();
 
@@ -61,7 +74,9 @@ public class TicTacToe extends JFrame {
 
                 // Make the selected move and update the state of the game.
                 MoveOrRestart(rowSelected, colSelected);
-                /* Refreshes painting canvas by posting the repaint event */
+                /**
+                 *  Refreshes painting canvas by posting the repaint event
+                 */
                 repaint();
             }
         });
@@ -104,7 +119,9 @@ public class TicTacToe extends JFrame {
         gamePlayer = Player.EX;       // ex plays first
     }
 
-    /* If game is still playing nobody has won or drawn then changeGameState  */
+    /**
+     *If game is still playing nobody has won or drawn then changeGameState
+     */
     public void MoveOrRestart(int rowSelected, int colSelected) {
         if (gameState == GameState.PLAYING) {
             if (validMove(rowSelected, colSelected)) {
@@ -116,13 +133,17 @@ public class TicTacToe extends JFrame {
         }
     }
 
-    /* checks whether the move is valid or not */
+    /**
+     *  checks whether the move is valid or not
+     */
 
     public boolean validMove(int row, int col) {
         return row >= 0 && row < ROW && col >= 0 && col < COLUMN && playBoard[row][col] == Player.EMPTY;
     }
 
-    /* makes the move and changes gameState */
+    /**
+     * makes the move and changes gameState
+     */
     public void changeGameState(Player thePlayer, int rowSelected, int colSelected) {
         playBoard[rowSelected][colSelected] = gamePlayer; // move
         if (waysToWin(thePlayer, rowSelected, colSelected)) {
@@ -138,7 +159,9 @@ public class TicTacToe extends JFrame {
         gamePlayer = (gamePlayer == Player.EX) ? Player.NAUGHT : Player.EX;
     }
 
-    /* True when drawn. When there are no more empty cells, it's a draw */
+    /**
+     * True when drawn. When there are no more empty cells, it's a draw
+     */
     public boolean hasDrawn() {
         for (int row = 0; row < ROW; ++row) {
             for (int col = 0; col < COLUMN; ++col) {
@@ -151,7 +174,7 @@ public class TicTacToe extends JFrame {
     }
 
     /**
-     * Returns true EX has won against NAUGHT, or vice versa after placing at rowClicked and colClicked
+     * Returns true EX/X has won against NAUGHT/O, or vice versa after placing at rowClicked and colClicked
      */
     public boolean waysToWin(Player thePlayer, int rowClicked, int colClicked) {
         return ((playBoard[rowClicked][0] == thePlayer      // three in the row
@@ -193,7 +216,9 @@ public class TicTacToe extends JFrame {
 
             }
 
-            /** Paints the marks of all the cells that are not empty. Graphics2d is used to set SPEN's stroke */
+            /**
+             * Paints the marks of all the cells that are not empty. Graphics2d is used to set SPEN's stroke
+             */
 
             Graphics2D g2d = (Graphics2D) g;
             g2d.setStroke(new BasicStroke(SPEN_WIDTH, BasicStroke.CAP_ROUND,
@@ -214,7 +239,10 @@ public class TicTacToe extends JFrame {
                     }
                 }
             }
-            /* This prints status bar message */
+
+            /**
+             * This prints status bar message
+             */
             if (gameState == GameState.PLAYING) {
                 statusBar.setForeground(Color.BLACK);
                 if (gamePlayer == Player.EX) {
