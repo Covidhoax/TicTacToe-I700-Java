@@ -110,7 +110,6 @@ public class TicTacToe extends JFrame {
         final String VERSION = "0.1FR";
         setTitle("Tic Tac Toe " + VERSION);
         setVisible(true);  // show this JFrame
-
         setResizable(false);
 
 
@@ -294,9 +293,13 @@ public class TicTacToe extends JFrame {
                 Naught_WonCount++;
                 statusBar.setText("O Won!  Score is O: " + Naught_WonCount + " &  X: " + Ex_WonCount +
                         " Draws: " + DrawnCount + " Click to play again.");
+            }if (Ex_WonCount == 5 || Naught_WonCount == 5) {
+                statusBar.setText("My Goodness,you are doing well.You have now won 5 times");
             }
         }
     }
+
+
 }
 
 
