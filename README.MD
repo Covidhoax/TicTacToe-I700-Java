@@ -11,8 +11,8 @@
 Installation guide:
 1. Clone repository from GitHub
 2. Import project with Java IDE
-3. Run the Test class
-4. Alternatively I might upload a jar file in the near future.
+3. Run the TicTacToeGame class
+
 
 What is Tic Tac Toe Game like?
 It is a very simple, two player NO AI based Tic Tac Toe game. There is a background music taken from "vgmusic.com"
